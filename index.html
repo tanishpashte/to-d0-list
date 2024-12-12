@@ -2,20 +2,26 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content"">
     <link rel="stylesheet" href="./output.css">
+    <script src="./script.js"></script>
     <title>Document</title>
 </head>
 <body class="bg-slate-950 flex justify-center items-center h-screen">
     <div class="container bg-slate-900 text-slate-300 flex flex-col items-center justify-center py-12 w-fit px-12 rounded-xl
     ">
         <div id="date" class="text-4xl mb-10">
-            Date and time
+            <!-- Date and time -->
         </div>
-        <div id="input-task-field" class="flex justify-center items-center gap-3">
-            <input type="text" placeholder="Enter your task" class="px-2 py-1 text-black bg-slate-300 rounded-lg h-10">
-            <button class="bg-blue-500 text-black flex justify-center items-center p-2 h-10 w-10 rounded-lg"><i class="fa-solid fa-plus" style="color: #e5efff;"></i></button>
+
+        <div id="input-task-div" class="flex justify-center items-center gap-3">
+            <input type="text" placeholder="Enter your task" class="px-2 py-1 text-black bg-slate-300 rounded-lg h-10" id="input-task-field">
+            <button class="bg-blue-500 text-black flex justify-center items-center p-2 h-10 w-10 rounded-lg task-submit-button"><i class="fa-solid fa-plus" style="color: #e5efff;"></i></button>
         </div>
+        <div id="task-list" class="w-full my-2 flex flex-col justify-center items-center">
+
+        </div>
+        <button id="clear-all" class="my-2 bg-yellow-400 text-black px-2 py-1 rounded-full">Clear all tasks</button>
     </div>
     <script src="https://kit.fontawesome.com/efd35c9483.js" crossorigin="anonymous"></script>
 </body>
