@@ -3,7 +3,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let taskList = document.querySelector('#task-list');
     let taskInput = document.querySelector("#input-task-field");
-    let submitTask = document.querySelector(".task-submit-button");    
+    let submitTask = document.querySelector(".task-submit-button");   
+    console.log(document.querySelector('#delete-task-button'));
+    
+
+    
 
     let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
     tasks.forEach((task) => showTask(task));
@@ -13,6 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
         createTask();
         saveTasks();
     })
+
 
     function setTime(){
         const dayNames = ["Sunday","Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
@@ -43,11 +48,38 @@ document.addEventListener("DOMContentLoaded", () => {
     function showTask(task){
         const li = document.createElement('li');
         li.innerHTML = `
-            <span class="flex items-center">${task.text}</span>
-            <button class="bg-red-600 text-white rounded-md px-2 py-1">Delete</button>
+            <span class="flex items-center task-item-text">${task.text}</span>
+            <button id="delete-task-button" class="bg-red-600 text-white rounded-md px-2 py-1">Delete</button>
         `
         
-        li.classList.add("bg-slate-600", "px-2", "py-1", "list-none" ,"flex", "justify-between", "my-2", "w-5/6", "rounded-md")
+        li.classList.add("bg-slate-800", "px-2", "py-1", "list-none" ,"flex", "justify-between", "my-2", "w-5/6", "rounded-md")
+        
+        // delete event 
+        li.addEventListener('click', (event) => {
+            if(event.target.id === "delete-task-button"){
+                tasks =  tasks.filter((t) => t.id !== task.id)
+                saveTasks();
+                li.remove();
+            }
+        })
+
+        //task complete
+        li.addEventListener('click', (event) => {
+            if(event.target.id !== "delete-task-button"){
+                task.completed = !task.completed;
+                if(task.completed){
+                    li.querySelector('.task-item-text').classList.add("line-through")
+                    li.classList.remove("bg-slate-800");
+                    li.classList.add("bg-slate-600");
+                }else{
+                    li.querySelector('.task-item-text').classList.remove("line-through")
+                    li.classList.remove("bg-slate-600");
+                    li.classList.add("bg-slate-800");
+                }
+                saveTasks();
+                
+            }
+        })
         
         taskList.appendChild(li);
     }
